@@ -8,3 +8,7 @@ export const usergetfunc = async()=>{
 export const registerfunc = async(data,header)=>{
     return await commonrequest("POST",`${BASE_URL}/user/register`,data,header);
 }
+
+export const singleUsergetfunc = async(id)=>{
+    return await commonrequest("GET", `${BASE_URL}/user/${id}`,"")
+}
