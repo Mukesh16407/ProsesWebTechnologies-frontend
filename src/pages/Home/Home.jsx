@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { usergetfunc } from "../../services/Apis";
+import { deletefun, usergetfunc } from "../../services/Apis";
 import Button from "react-bootstrap/Button";
 import { Tables } from "../../components/table/Tables";
 import { Spiner } from "../../components/spinner/Spinner";
+import { toast } from "react-toastify";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -25,6 +26,15 @@ export const Home = () => {
     }
   };
 
+  const deleteUser =async(id)=>{
+    const response = await deletefun(id);
+ 
+    if(response.status === 200){
+     userGet();
+    }else{
+     toast.error("error")
+    }
+   };
   useEffect(() => {
     userGet();
     setTimeout(() => {
@@ -44,7 +54,7 @@ export const Home = () => {
         {showspin ? (
           <Spiner />
         ) : (
-          <Tables userdata={userdata} userGet={userGet} />
+          <Tables userdata={userdata}  deleteUser={deleteUser}/>
         )}
       </div>
     </div>

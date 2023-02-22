@@ -2,3 +2,6 @@
     width: 35px;
     border-radius: 50%;
 }
+.dropdown-toggle::after{
+content: none;
+}

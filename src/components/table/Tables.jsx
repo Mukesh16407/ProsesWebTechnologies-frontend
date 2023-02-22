@@ -8,7 +8,7 @@ import { BASE_URL } from "../../services/helper";
 import { ToastContainer} from "react-toastify";
 import "./table.css";
 
-export const Tables = ({ userdata, userGet }) => {
+export const Tables = ({ userdata,deleteUser }) => {
   return (
     <>
       <div className="container">
@@ -41,13 +41,13 @@ export const Tables = ({ userdata, userGet }) => {
                          <img src={`${BASE_URL}/uploads/${item.profile}`} alt="img" />
                          </td>
                          <td>
-                         <Dropdown>
+                         <Dropdown >
                         <Dropdown.Toggle
                           variant="light"
                           className="action"
                           id="dropdown-basic"
                         >
-                          <i className="fa-solid fa-ellipsis-vertical"></i>
+                          <i className="fa-solid fa-ellipsis-vertical"></i>{""}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                           <Dropdown.Item>
@@ -75,7 +75,7 @@ export const Tables = ({ userdata, userGet }) => {
                             </NavLink>
                           </Dropdown.Item>
                           <Dropdown.Item>
-                            <div >
+                            <div onClick={() => deleteUser(item._id)}>
                               <i
                                 class="fa-solid fa-trash"
                                 style={{ color: "red" }}

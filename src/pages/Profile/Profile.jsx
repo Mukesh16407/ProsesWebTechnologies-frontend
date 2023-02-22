@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { singleUsergetfunc } from '../../services/Apis';
 import { Spiner } from "../../components/spinner/Spinner";
 import Row from "react-bootstrap/esm/Row";
 import { BASE_URL } from '../../services/helper';
 import './profile.css';
 import moment from "moment"
+import Button from "react-bootstrap/Button";
 
 export const Profile = () => {
-
+  const navigate = useNavigate();
   const [showspin, setShowSpin] = useState(true);
   const [userprofile, setUserProfile] = useState({});
 
@@ -24,6 +25,9 @@ export const Profile = () => {
     
   };
 
+  const backbutton=()=>{
+    navigate(-1)
+  }
   useEffect(() => {
     userProfileGet();
     setTimeout(() => {
@@ -69,6 +73,10 @@ export const Profile = () => {
                   <i className="fa-solid fa-calendar-days calendar"></i>&nbsp;Date
                   Updated&nbsp;:- <span>{moment(userprofile.dateUpdated).format("DD-MM-YYYY")}</span>{" "}
                 </h5>
+                <Button variant="primary" onClick={backbutton}>
+            {" "}
+             Go to Home Page
+          </Button>
          </div>
       </div>
     )}
