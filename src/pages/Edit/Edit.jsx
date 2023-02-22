@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { editfunc, singleUsergetfunc } from '../../services/Apis';
 import Card from "react-bootstrap/Card";
@@ -11,12 +11,13 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import './edit.css'
+import { updateUser } from '../../Context/ContextProvider';
 
 export const Edit = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const {setUpdate} = useContext(updateUser);
   const [inputdata, setInputData] = useState({
     userName: "",
     email: "",
@@ -85,6 +86,7 @@ export const Edit = () => {
       const response = await editfunc(id,data,config);
 
       if(response.status === 200){
+        setUpdate(response.data)
         navigate("/")
       }else{
         toast.error("Error!")

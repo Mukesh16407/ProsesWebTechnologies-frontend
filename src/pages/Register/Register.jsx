@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
@@ -8,9 +8,13 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import './register.css'
 import { registerfunc } from '../../services/Apis';
+import { addUserData } from '../../Context/ContextProvider';
 
 export const Register = () => {
+
   const navigate = useNavigate();
+  const { setUseradd } = useContext(addUserData);
+
   const [inputdata, setInputData] = useState({
     userName: "",
     email: "",
@@ -82,6 +86,7 @@ export const Register = () => {
           address: ""
         });
         setImage("");
+        setUseradd(response.data)
         toast.success("Registration successfully done");
         navigate("/");
       }else{
